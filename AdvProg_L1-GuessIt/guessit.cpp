@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 #include <cstdlib>
 #include <ctime>
 #include "guessit.h"
@@ -129,3 +129,4 @@ int run() {
         isContinued = getPlayerOpinion();
     } while (checkContinuePlaying(isContinued));
     return 0;
+}
