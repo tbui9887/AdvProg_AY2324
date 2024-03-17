@@ -21,7 +21,7 @@ double mySqrt(double x);
 double myCos(double x)
 {
     double old_value;
-    double value = x;
+    double value = 1;
     int n = 1;
     do{
         old_value = value;
