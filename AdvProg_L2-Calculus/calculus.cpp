@@ -12,28 +12,15 @@ double mySin(double x);
 double myCos(double x);
 double mySqrt(double x);
 
-/***
-    Args:
-        x (double): a number
-    Returns:
-        double: cosine of x
-***/
-double myCos(double x)
+double F(double x, int n)
 {
-    double old_value;
+    int a;
+    if (n%2==0) a = 1;
+    else a = -1;
+
     double value = 1;
-    int n = 1;
-    do{
-        old_value = value;
-        double mul = 1;
-        for (int i = 1; i < 2*n; i++){
-            mul*=i;
-        }
-        value += (pow(-1,n)*pow(x,2*n))/mul;
-        n++;
-    }
-    while (value - old_value >= 0.1);
-    return value;
+    for (int i = 1; i <= 2*n+1; i++) value = value * (x/double(i));
+    return a * value;
 }
 
 /***
@@ -44,22 +31,25 @@ double myCos(double x)
 ***/
 double mySin(double x)
 {
-    double old_value;
-    double value = x;
-    int n = 1;
-    do{
-        old_value = value;
-        double mul = 1;
-        for (int i = 1; i < 2*n+1; i++){
-            mul*=i;
-        }
-        value += (pow(-1,n)*pow(x,2*n+1))/mul;
+    double sin = 0; int n = 0;
+    while (abs(F(x,n)) >= 0.00001){
+        sin += F(x,n);
         n++;
     }
-    while (value - old_value >= 0.1);
-    return value;
+    return sin;
 }
 
+/***
+    Args:
+        x (double): a number
+    Returns:
+        double: cosine of x
+***/
+double myCos(double x)
+{
+    double cos = sqrt(1 - mySin(x)*mySin(x));
+    return cos;
+}
 
 /***
     Args:
